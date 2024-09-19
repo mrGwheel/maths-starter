@@ -69,32 +69,32 @@ h1 {
 
 /* Default state with pause icon */
 #pauseGame {
-  background-image: url("/images/pause.svg");
+  background-image: url("images/pause.svg");
   background-size: cover;
 }
 
 /* Hover state for the default (paused) icon */
 #pauseGame:hover {
-  background-image: url("/images/pause-orange.svg");
+  background-image: url("images/pause-orange.svg");
 }
 
 /* State when the game is playing (play icon) */
 #pauseGame.playing {
-  background-image: url("/images/play.svg");
+  background-image: url("images/play.svg");
 }
 
 /* Hover state when the game is playing (hovered play icon) */
 #pauseGame.playing:hover {
-  background-image: url("/images/play-orange.svg");
+  background-image: url("images/play-orange.svg");
 }
 
 #quitIcon {
   margin-left: 0.75rem;
-  background-image: url("/images/stop.svg"); /* Default stop image */
+  background-image: url("images/stop.svg"); /* Default stop image */
 }
 
 #quitIcon:hover {
-  background-image: url("/images/stop-red.svg"); /* Hovered reset image */
+  background-image: url("images/stop-red.svg"); /* Hovered reset image */
 }
 
 /* Center content */
