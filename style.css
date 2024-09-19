@@ -1,0 +1,389 @@
+:root {
+  --primary-color: #32afca;
+  --secondary-color: #4fa762;
+  --accent-color: #e9696a;
+  --accent2-color: #f49e21;
+  --background-color: #f5f5f5;
+  --primary-font: "Arial", sans-serif;
+  --secondary-font: sans-serif;
+}
+
+body {
+  font-family: var(--primary-font);
+  height: 100vh;
+  margin: 0;
+  background-color: var(--background-color);
+  color: #333;
+}
+
+header {
+  margin: 2rem auto 1rem auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 90%;
+  padding: 0 20px;
+  color: var(--primary-color);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.logo img {
+  max-width: 68px;
+  margin-right: 1rem;
+}
+
+.logo-text {
+  max-width: 200px;
+  min-width: 150px;
+}
+h1 {
+  font-family: var(--secondary-font);
+  margin: 0;
+}
+
+.header-icons {
+  display: flex;
+  align-items: center;
+}
+/* Pause and reset buttons */
+/* Pause and reset buttons */
+#pauseGame,
+#quitIcon {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  width: 50px;
+  border: none;
+  cursor: pointer;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: background-image 0.3s ease;
+  border-radius: 50%;
+}
+
+/* Default state with pause icon */
+#pauseGame {
+  background-image: url("/images/pause.svg");
+  background-size: cover;
+}
+
+/* Hover state for the default (paused) icon */
+#pauseGame:hover {
+  background-image: url("/images/pause-orange.svg");
+}
+
+/* State when the game is playing (play icon) */
+#pauseGame.playing {
+  background-image: url("/images/play.svg");
+}
+
+/* Hover state when the game is playing (hovered play icon) */
+#pauseGame.playing:hover {
+  background-image: url("/images/play-orange.svg");
+}
+
+#quitIcon {
+  margin-left: 0.75rem;
+  background-image: url("/images/stop.svg"); /* Default stop image */
+}
+
+#quitIcon:hover {
+  background-image: url("/images/stop-red.svg"); /* Hovered reset image */
+}
+
+/* Center content */
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - 150px); /* Subtract header height */
+}
+
+/* Center and style the game container */
+.game-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+  max-width: 500px;
+  height: 65vh;
+  border: 2px solid var(--primary-color);
+  border-radius: 10px;
+  padding: 20px;
+  background-color: white;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+.controls {
+  margin-bottom: 2rem;
+}
+/* Labels for each section */
+.controls-label {
+  font-family: var(--secondary-font);
+  font-size: 1.2em;
+  color: var(--primary-color);
+  margin-bottom: 10px;
+  display: block;
+  text-align: center;
+}
+
+/* Selection button styling */
+.range-button,
+.cards-button,
+.operation-button,
+.time-button {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 20px;
+  font-size: 1.5rem;
+  margin: 5px;
+  border: 2px solid var(--primary-color);
+  border-radius: 5px;
+  background-color: white;
+  color: var(--primary-color);
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.range-button:hover,
+.cards-button:hover,
+.operation-button:hover,
+.time-button:hover {
+  background-color: var(--secondary-color);
+  color: white;
+}
+
+.range-button.selected,
+.cards-button.selected,
+.operation-button.selected,
+.time-button.selected {
+  background-color: var(--secondary-color);
+  color: white;
+  border-color: var(--secondary-color);
+}
+
+/* Default button style for "Start Game", modal close, etc. */
+.default-button {
+  appearance: none;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 1.2em;
+  cursor: pointer;
+  margin-top: 15px;
+  transition: background-color 0.3s;
+}
+
+.default-button:hover,
+#revealButton:hover {
+  background-color: var(--accent-color);
+}
+
+/* Modal Styling */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999; /* Ensure it stays above other elements */
+}
+
+.modal-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  width: 80%;
+  max-width: 500px; /* Limit maximum size for larger screens */
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Add shadow for better focus */
+  animation: modalFadeIn 0.3s ease-in-out; /* Add animation for better experience */
+}
+
+/* Modal fade-in animation */
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.modal-content p {
+  font-family: var(--secondary-font);
+  color: var(--primary-color);
+  font-size: 1.2em;
+}
+
+.modal-content button {
+  margin-top: 10px;
+}
+
+#customAlertModal .modal-content {
+  max-width: 400px; /* Smaller modal size for alerts */
+  padding: 20px;
+}
+#customAlertModal,
+#quitModal {
+  display: none;
+}
+
+#closeAlertButton {
+  margin-top: 10px;
+}
+
+/* Game card container */
+.game-card-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 65vh;
+  margin: 0 auto;
+}
+
+.operator-png {
+  padding-top: 1rem;
+  max-width: 64px;
+  margin-right: 2rem;
+  display: block;
+}
+
+.number {
+  font-size: 12rem;
+  font-weight: bold;
+}
+
+/* Parent container to stack the game card and reveal button vertically */
+.game-area {
+  display: flex;
+  flex-direction: column; /* Stack items vertically */
+  justify-content: center; /* Center content vertically */
+  align-items: center; /* Center content horizontally */
+  height: 100%; /* Ensure it fills the available space */
+  min-width: 400px;
+}
+
+/* Game card styling */
+.game-card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row; /* Operator and number side by side */
+  width: 90%;
+  max-width: 550px;
+  height: 50vh;
+  border: 2px solid var(--primary-color);
+  border-radius: 10px;
+  padding: 3rem;
+  background-color: white;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px; /* Add space below the card for the button */
+  opacity: 1;
+  transition: opacity 0.5s ease-in-out; /* Add smooth fade transition */
+}
+
+/* Keyframes for fade-in/out effect */
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+/* Reveal button styling (now centered and below the game card) */
+#revealButton {
+  display: none; /* Hidden by default */
+  padding: 10px 20px;
+  font-size: 1.2em;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#allowNegativesContainer {
+  color: var(--accent2-color);
+}
+
+/* Default styles for game controller elements */
+#gameController {
+  font-size: 1rem;
+  padding: 20px;
+}
+
+.gameController-item {
+  margin: 15px;
+}
+
+/* Media query for screens with a height of 885px or less */
+@media screen and (max-height: 885px) {
+  header {
+    margin-bottom: 0;
+  }
+  #gameController {
+    font-size: 0.9rem; /* Slightly smaller font */
+    padding: 15px; /* Reduce padding */
+    max-height: 80vh;
+  }
+
+  .gameController-item,
+  .controls {
+    margin: 10px; /* Reduce margin */
+  }
+
+  button,
+  input,
+  select {
+    padding: 8px 12px; /* Adjust padding for buttons and inputs */
+    font-size: 0.9rem; /* Slightly smaller font size for buttons and inputs */
+  }
+
+  .controls label {
+    margin-bottom: 3px;
+    font-size: 0.9rem; /* Slightly smaller font size for labels */
+  }
+
+  .controls input[type="checkbox"],
+  .controls input[type="radio"] {
+    width: 18px; /* Adjust checkbox/radio button size */
+    height: 18px;
+  }
+
+  .range-button,
+  .operation-button,
+  .cards-button,
+  .time-button {
+    font-size: 1.2rem;
+    padding: 7px 20px;
+    margin: 3px;
+  }
+
+  /* If you have any other specific control elements that need adjustments */
+  .slider {
+    width: 90%; /* Adjust the width of sliders if needed */
+  }
+}
