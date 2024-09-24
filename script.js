@@ -230,14 +230,10 @@ function displayCard() {
     // Update the total based on the operation
     if (operation === "addition") {
       totalSum += number;
-    } else if (operation === "subtraction") {
-      if (!allowNegatives && totalSum - number < 0) {
-        // Adjust the number to prevent negative total
-        totalSum = 0; // Or handle as desired
-      } else {
+    } else {
         totalSum -= number;
       }
-    }
+    
 
     // Log the updated total after the operation
     console.log(`Updated Total: ${totalSum}`);
@@ -308,6 +304,7 @@ function updateGameCard(operation, number) {
 function generateStartNumber() {
   let startNumber;
   const allowNegativesCheckbox = document.getElementById("allowNegatives");
+  const totalCardSum = gameNumbers.reduce((sum, num) => sum + num, 0);
   const allowNegatives = allowNegativesCheckbox
     ? allowNegativesCheckbox.checked
     : false;
@@ -324,8 +321,6 @@ function generateStartNumber() {
     selectedOperations.length === 1
   ) {
     // Subtraction only
-    const totalCardSum = gameNumbers.reduce((sum, num) => sum + num, 0);
-
     if (allowNegatives === false) {
       // If negatives are not allowed, start number is total sum + random number between 1 and 99
       startNumber = totalCardSum + getRandomNumber(1, 99);
@@ -335,7 +330,11 @@ function generateStartNumber() {
     }
   } else {
     // Mixed operations (Addition and Subtraction)
-    startNumber = getRandomNumber(75, 200);
+    if (allowNegatives === false && selectedOperations.length === 2) {
+      startNumber = totalCardSum + getRandomNumber(1, 35);
+    } else {
+      startNumber = getRandomNumber(1, Math.floor(totalCardSum / 2.5));
+    }
   }
 
   return startNumber;
