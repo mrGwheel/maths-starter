@@ -331,7 +331,7 @@ function generateStartNumber() {
   } else {
     // Mixed operations (Addition and Subtraction)
     if (allowNegatives === false && selectedOperations.length === 2) {
-      startNumber = totalCardSum + getRandomNumber(1, 35);
+      startNumber = totalCardSum + getRandomNumber(3, 19);
     } else {
       startNumber = getRandomNumber(1, Math.floor(totalCardSum / 2.5));
     }
