@@ -22,6 +22,8 @@ const resetButton = document.getElementById("quitIcon"); // Button to reset the 
 const quitModal = document.getElementById("quitModal"); // Warning modal
 const confirmQuit = document.getElementById("confirmQuit");
 const cancelQuit = document.getElementById("cancelQuit");
+const operator = gameCard.querySelector(".operator"); //game card operator
+const numberElement = gameCard.querySelector(".number"); //game card number
 
 // Set up event listeners for all button selections
 function setupEventListeners() {
@@ -222,18 +224,12 @@ function displayCard() {
       ? allowNegativesCheckbox.checked
       : false;
 
-    // Log the current operation, number, and total before update
-    console.log(
-      `Current Operation: ${operation}, Current Number: ${number}, Total Before Update: ${totalSum}`
-    );
-
     // Update the total based on the operation
     if (operation === "addition") {
       totalSum += number;
     } else {
-        totalSum -= number;
-      }
-    
+      totalSum -= number;
+    }
 
     // Log the updated total after the operation
     console.log(`Updated Total: ${totalSum}`);
@@ -276,22 +272,21 @@ function generateGameOperations(totalCards) {
 
 // Function to update the game card with the current operation and number
 function updateGameCard(operation, number) {
-  const operatorImg = gameCard.querySelector(".operator-png");
-  const numberElement = gameCard.querySelector(".number");
-
   // Apply fade-out effect before changing the content
   gameCard.style.opacity = 0; // Start fade-out
 
   setTimeout(() => {
     // Change the content of the game card during the fade-out
+    operator.style.display = "block"; // Hide operator
     if (operation === "addition") {
-      operatorImg.style.display = "block";
-      operatorImg.src = "images/plus.svg"; // Path to addition SVG
+      operator.textContent = "+";
+      operator.style.padding = "0 2rem 0 0";
     } else if (operation === "subtraction") {
-      operatorImg.style.display = "block";
-      operatorImg.src = "images/minus.svg"; // Path to subtraction SVG
+      operator.textContent = "-";
+      operator.style.padding = "0 2rem 0 0";
     } else {
-      operatorImg.style.display = "none"; // Hide the operator image if no operation
+      operator.textContent = "";
+      operator.style.padding = "0";
     }
 
     numberElement.textContent = number; // Update the number
@@ -385,10 +380,8 @@ function showPlayAgainButton() {
 
 // Function to show the "?" card at the end of the game
 function showQuestionMark() {
-  const operatorImg = gameCard.querySelector(".operator-png");
-  const numberElement = gameCard.querySelector(".number");
-
-  operatorImg.style.display = "none"; // Hide operator image
+  operator.style.display = "none"; // Hide operator
+  operator.style.padding = "0";
   numberElement.textContent = "?"; // Display "?"
 
   // Ensure the game card is still visible
